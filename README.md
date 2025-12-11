@@ -61,7 +61,7 @@ Open this file in any web browser to view your custom schedule.
 
 ## Visual Example
 
-A screenshot of the generated HTML output is provided below:
+A screenshot of the example generated HTML output is provided below:
 <img width="1456" height="647" alt="image" src="https://github.com/user-attachments/assets/679a175b-f678-4dc8-a8fc-e2e16d3ffb4f" />
 
 
@@ -85,9 +85,3 @@ If you find bugs or have suggestions (e.g., support for Minor/LA slots, conflict
 ##  License
 
 This project is licensed under the **MIT License**.
-
-The MIT License allows anyone to reuse your code for almost any purpose (even commercial) as long as they include a copy of the license and your copyright notice.
-
-**You, as the creator of the code, hold the copyright.**
-
-You should create a separate file named `LICENSE` in the root of your repository with the following content (replace `[year]` with `2025` and `[fullname]` with your name):
