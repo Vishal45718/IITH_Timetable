@@ -1,8 +1,8 @@
-# 📅 IITH Timetable Generator
+# IITH Timetable Generator
 
-## 🌟 Overview
+##  Overview
 
-This is a Python-based command-line utility designed to generate a highly customized, professional, and visually appealing weekly class schedule for **IIT Hyderabad (IITH)** use. The generator takes your registered course slots, course names, and classrooms as input, and outputs a self-contained, dark-themed HTML file.
+This is a Python-based command-line utility designed to generate a  weekly class schedule for **IIT Hyderabad (IITH)** use. The generator takes your registered course slots, course names, and classrooms as input, and outputs a  HTML file.
 
 The core timetable structure is based on the institution's fixed slot template (1hr and 1.5hr slots):
 
@@ -16,17 +16,16 @@ The core timetable structure is based on the institution's fixed slot template (
 
 ---
 
-## ✨ Key Features
+## Key Features
 
-* **Personalized Content:** The final timetable displays actual **Course Names** (e.g., "Compilers") and Room Numbers, not just slot letters.
-* **Professional Dark Theme:** The generated HTML features a dark, high-contrast aesthetic suitable for professional and focused viewing.
+* **Personalized Content:** The final timetable displays actual **Course Names** and Room Numbers, not just slot letters.
 * **Optimized Layout:** The layout is optimized for viewing, with **Days on the Y-axis** and **Time Slots on the X-axis**.
 * **Dynamic Highlighting:** The currently active class (based on the viewing device's time) is highlighted with a striking **cyan/blue holographic glow**.
 * **Clean Look:** All empty/free slots are blank for maximum visual clarity.
 
 ---
 
-## 🚀 Getting Started
+##  Getting Started
 
 ### Prerequisites
 
@@ -60,7 +59,7 @@ Open this file in any web browser to view your custom schedule.
 
 ---
 
-## 🎨 Visual Example
+## Visual Example
 
 A screenshot of the generated HTML output is provided below:
 
@@ -68,7 +67,7 @@ A screenshot of the generated HTML output is provided below:
 
 ---
 
-## 🤝 Contribution
+##  Contribution
 
 We encourage contributions from the IITH community to improve this tool!
 
@@ -82,7 +81,7 @@ If you find bugs or have suggestions (e.g., support for Minor/LA slots, conflict
 
 ---
 
-## 📝 License
+##  License
 
 This project is licensed under the **MIT License**.
 
