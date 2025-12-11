@@ -62,6 +62,7 @@ Open this file in any web browser to view your custom schedule.
 ## Visual Example
 
 A screenshot of the generated HTML output is provided below:
+<img width="1456" height="647" alt="image" src="https://github.com/user-attachments/assets/679a175b-f678-4dc8-a8fc-e2e16d3ffb4f" />
 
 
 
