@@ -42,7 +42,7 @@ CSS_STYLE_DARK = """
 <style>
     /* 1. Overall Theme & Body */
     body { font-family: 'Roboto', 'Arial', sans-serif; background-color: #121212; padding: 30px; color: #e0e0e0; }
-    h1 { color: #bb86fc; text-align: center; margin-bottom: 40px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; }
+    h1 { color: #f05a28; text-align: center; margin-bottom: 40px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; }
 
     /* 2. Container and Table Structure */
     .timetable-container { max-width: 1400px; margin: 0 auto; box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5); border-radius: 8px; overflow: hidden; border: 1px solid #333; }
@@ -83,6 +83,24 @@ CSS_STYLE_DARK = """
 
     /* 6. Footer */
     .footer { text-align: center; margin-top: 40px; color: #666; font-size: 0.8em; }
+
+    /* Print styles for export */
+    @media print {
+        .no-print { display: none !important; }
+        body { background-color: #ffffff !important; color: #000000 !important; padding: 0 !important; }
+        h1 { color: #0b2545 !important; margin-bottom: 20px !important; }
+        .timetable-container { box-shadow: none !important; border: 1px solid #000000 !important; max-width: 100% !important; }
+        table { background-color: #ffffff !important; }
+        th { background-color: #f1f5f9 !important; color: #0b2545 !important; border-bottom: 2px solid #000000 !important; border-right: 1px solid #cccccc !important; }
+        td { border-bottom: 1px solid #cccccc !important; border-right: 1px solid #cccccc !important; }
+        td:first-child { background-color: #e2e8f0 !important; color: #0b2545 !important; border-right: 2px solid #000000 !important; }
+        .slot-content { background-color: #f8fafc !important; border: 1px solid #000000 !important; color: #000000 !important; transform: none !important; box-shadow: none !important; }
+        .course-name { color: #000000 !important; }
+        .slot-info { color: #333333 !important; }
+        .challenge-slot { background-color: #f8fafc !important; color: #000000 !important; border: 1px dashed #000000 !important; }
+        .empty-slot { background-color: #ffffff !important; }
+        .footer { color: #555555 !important; margin-top: 20px !important; }
+    }
 </style>
 """
 
@@ -97,9 +115,35 @@ def generate_timetable_html(slots, user_data, slots_color_map):
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Professional Dark Timetable</title>
     {CSS_STYLE_DARK}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </head>
 <body>
     <h1>TIMETABLE</h1>
+    <div style="display: flex; justify-content: center; gap: 15px; margin-bottom: 30px; flex-wrap: wrap;" class="no-print">
+        <!-- Back button -->
+        <a href="/" style="display: inline-flex; align-items: center; justify-content: center; text-decoration: none; color: #e2e8f0; border: 1.5px solid #444; background: #1c1c1c; padding: 10px 20px; border-radius: 8px; font-weight: 600; font-size: 0.9em; transition: all 0.25s ease; gap: 8px;" onmouseover="this.style.borderColor='#f05a28'; this.style.color='#f05a28';" onmouseout="this.style.borderColor='#444'; this.style.color='#e2e8f0';">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+            Back to Planner
+        </a>
+        
+        <!-- Export PDF button -->
+        <button onclick="window.print()" style="display: inline-flex; align-items: center; justify-content: center; background: #f05a28; color: white; border: none; padding: 10px 20px; border-radius: 8px; font-weight: 600; font-size: 0.9em; cursor: pointer; transition: all 0.25s ease; gap: 8px;" onmouseover="this.style.backgroundColor='#d4481b';" onmouseout="this.style.backgroundColor='#f05a28';">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V2h12v7"></path><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+            Print / Save PDF
+        </button>
+        
+        <!-- Export HTML button -->
+        <button onclick="downloadHTML()" style="display: inline-flex; align-items: center; justify-content: center; background: #1c1c1c; color: #e2e8f0; border: 1.5px solid #444; padding: 10px 20px; border-radius: 8px; font-weight: 600; font-size: 0.9em; cursor: pointer; transition: all 0.25s ease; gap: 8px;" onmouseover="this.style.borderColor='#f05a28'; this.style.color='#f05a28';" onmouseout="this.style.borderColor='#444'; this.style.color='#e2e8f0';">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+            Download HTML
+        </button>
+        
+        <!-- Save as Image button -->
+        <button onclick="downloadPNG()" style="display: inline-flex; align-items: center; justify-content: center; background: #1c1c1c; color: #e2e8f0; border: 1.5px solid #444; padding: 10px 20px; border-radius: 8px; font-weight: 600; font-size: 0.9em; cursor: pointer; transition: all 0.25s ease; gap: 8px;" onmouseover="this.style.borderColor='#f05a28'; this.style.color='#f05a28';" onmouseout="this.style.borderColor='#444'; this.style.color='#e2e8f0';">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+            Save as Image (PNG)
+        </button>
+    </div>
     <div class="timetable-container">
     <table>
         <thead>
@@ -159,6 +203,45 @@ def generate_timetable_html(slots, user_data, slots_color_map):
     </table>
     </div>
     <div class="footer">Generated on {time.strftime('%Y-%m-%d at %H:%M:%S')}. | Empowered by your institutional Timetable Generator.</div>
+    <script>
+        function downloadHTML() {{
+            const clone = document.documentElement.cloneNode(true);
+            const buttons = clone.querySelector('.no-print');
+            if (buttons) buttons.remove();
+            const scriptTag = clone.querySelector('script');
+            if (scriptTag) scriptTag.remove();
+            
+            const htmlContent = '<!DOCTYPE html>\\n' + clone.outerHTML;
+            const blob = new Blob([htmlContent], {{ type: 'text/html' }});
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = 'iith_timetable.html';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }}
+
+        function downloadPNG() {{
+            const element = document.querySelector('.timetable-container');
+            if (typeof html2canvas === 'undefined') {{
+                alert('Export library is still loading, please try again in a second!');
+                return;
+            }}
+            html2canvas(element, {{
+                backgroundColor: '#121212',
+                scale: 3, // Premium high-resolution vector scaling!
+                useCORS: true,
+                logging: false
+            }}).then(canvas => {{
+                const link = document.createElement('a');
+                link.href = canvas.toDataURL('image/png');
+                link.download = 'iith_timetable.png';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            }});
+        }}
+    </script>
 </body>
 </html>
     """
@@ -196,6 +279,34 @@ def get_user_course_data():
         }
 
     return user_slots, user_course_data
+
+
+def generate_timetable(slot, course, room):
+    user_data = {}
+    if slot:
+        # Support comma-separated slots (e.g. A, B, C) or a single slot
+        slots_list = [s.strip().upper() for s in slot.split(',') if s.strip()]
+        for s in slots_list:
+            user_data[s] = {
+                'name': course.strip() if course.strip() else f"Course {s}",
+                'room': room.strip() if room else "TBD"
+            }
+    return generate_timetable_html(TIMETABLE_SLOTS, user_data, SLOT_COLORS_DARK)
+
+
+def generate_timetable_from_lists(slots_list, courses_list, rooms_list):
+    user_data = {}
+    for slot, course, room in zip(slots_list, courses_list, rooms_list):
+        if not slot:
+            continue
+        # Split by comma in case they entered multiple slots for a single course row
+        sub_slots = [s.strip().upper() for s in slot.split(',') if s.strip()]
+        for s in sub_slots:
+            user_data[s] = {
+                'name': course.strip() if course.strip() else f"Course {s}",
+                'room': room.strip() if room else "TBD"
+            }
+    return generate_timetable_html(TIMETABLE_SLOTS, user_data, SLOT_COLORS_DARK)
 
 
 if __name__ == "__main__":
