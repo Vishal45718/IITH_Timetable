@@ -126,12 +126,6 @@ def generate_timetable_html(slots, user_data, slots_color_map):
             Back to Planner
         </a>
         
-        <!-- Export PDF button -->
-        <button onclick="window.print()" style="display: inline-flex; align-items: center; justify-content: center; background: #f05a28; color: white; border: none; padding: 10px 20px; border-radius: 8px; font-weight: 600; font-size: 0.9em; cursor: pointer; transition: all 0.25s ease; gap: 8px;" onmouseover="this.style.backgroundColor='#d4481b';" onmouseout="this.style.backgroundColor='#f05a28';">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V2h12v7"></path><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
-            Print / Save PDF
-        </button>
-        
         <!-- Export HTML button -->
         <button onclick="downloadHTML()" style="display: inline-flex; align-items: center; justify-content: center; background: #1c1c1c; color: #e2e8f0; border: 1.5px solid #444; padding: 10px 20px; border-radius: 8px; font-weight: 600; font-size: 0.9em; cursor: pointer; transition: all 0.25s ease; gap: 8px;" onmouseover="this.style.borderColor='#f05a28'; this.style.color='#f05a28';" onmouseout="this.style.borderColor='#444'; this.style.color='#e2e8f0';">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
